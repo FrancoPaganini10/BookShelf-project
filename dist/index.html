@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="darkreader-lock">
+  <title>BookShelf</title>
+  
+  <link rel="icon" href="/assets/libro-magico-Bopp3Wpm.png">
+  <script type="module" crossorigin src="/assets/main-DuTzIU6J.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/styles-D1a0Tqep.js">
+  <link rel="stylesheet" crossorigin href="/assets/styles-DtRRGMc-.css">
+</head>
+<body>
+
+  <header class="barra-navegacion">
+    <div class="marcapaginas"></div>
+    <div class="contenedor-navegacion">
+      <a href="index.html" class="marca-logo">Book<span>shelf</span></a>
+      <nav class="enlaces-menu">
+        <a href="index.html" class="enlace active">Buscar</a>
+        <a href="favorites.html" class="enlace">Mis Favoritos (<span id="fav-count">0</span>)</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="seccion-principal">
+    <h1 class="titulo-principal">Encontrá tu próximo libro</h1>
+    <p class="subtitulo-principal">Miles de Libros al alcance de tus manos</p>
+    
+    <form class="formulario-busqueda" id="search-form">
+      <input
+        type="text"
+        class="caja-entrada"
+        id="search-input"
+        placeholder="Escribí un título, autor o categoría..."
+        autocomplete="off"
+      />
+      <button type="submit" class="boton-buscar">Buscar</button>
+      <button type="button" class="boton-limpiar" id="clear-search" onclick="limpiarBusqueda()">Limpiar</button>
+    </form>
+
+    <div class="botones-rapidos">
+      <span>Sugerencias:</span>
+      <button class="chip" data-q="Harry Potter">Harry Potter</button>
+      <button class="chip" data-q="Borges">Borges</button>
+      <button class="chip" data-q="Ciencia Ficcion">Ciencia Ficción</button>
+    </div>
+  </section>
+
+  <div class="contador-resultados" id="contador-resultados" hidden>
+    Se encontraron <span id="cantidad-resultados">0</span> libros
+  </div>
+
+  <div class="barra-filtros" id="barra-filtros" hidden>
+    <div class="filtros-izquierda">
+      <span class="filtros-titulo">Ordenar por:</span>
+
+      <button class="boton-orden activo" id="btn-relevancia" onclick="ordenarPor('relevancia')">
+        Relevancia
+      </button>
+      <button class="boton-orden" id="btn-anio-nuevo" onclick="ordenarPor('anio-nuevo')">
+        Año ↓ más nuevo
+      </button>
+      <button class="boton-orden" id="btn-anio-viejo" onclick="ordenarPor('anio-viejo')">
+        Año ↑ más viejo
+      </button>
+      <button class="boton-orden" id="btn-titulo" onclick="ordenarPor('titulo')">
+        Título A–Z
+      </button>
+    </div>
+
+    <div class="filtros-derecha">
+      <span class="filtros-titulo">Filtrar:</span>
+
+      <select class="selector-filtro" id="filtro-siglo" onchange="aplicarFiltro()">
+        <option value="todos">Todos los años</option>
+        <option value="2000">Desde el 2000</option>
+        <option value="1900">1900 - 1999</option>
+        <option value="1800">1800 - 1899</option>
+        <option value="antiguo">Antes de 1800</option>
+      </select>
+    </div>
+  </div>
+
+  <main class="bloque-contenido">
+
+    <div class="estado-pantalla" id="empty-state">
+      <p class="texto-grande">📚</p>
+      <p>Escribí algo en el buscador para empezar a explorar tu estante.</p>
+    </div>
+
+    <div class="estado-pantalla" id="loader" hidden>
+      <div class="ruedita-carga"></div>
+      <p>Buscando en el servidor público...</p>
+    </div>
+
+    <div class="estado-pantalla" id="error-state" hidden>
+      <p class="texto-grande">⚠️</p>
+      <p>Hubo un problema de conexión. Intentá de nuevo.</p>
+    </div>
+
+    <div class="estado-pantalla" id="no-results" hidden>
+      <p>No se encontraron libros para esa búsqueda.</p>
+    </div>
+
+    <div class="grilla-libros" id="books-grid"></div>
+
+    <div class="paginacion" id="paginacion" hidden>
+      <button class="boton-pagina" id="btn-anterior" onclick="cambiarPagina(-1)">Anterior</button>
+      <span id="texto-pagina">Página 1 de 1</span>
+      <button class="boton-pagina" id="btn-siguiente" onclick="cambiarPagina(1)">Siguiente</button>
+    </div>
+
+  </main>
+
+  <footer class="pie-pagina">
+    <div class="pie-links">
+      <a href="index.html">Buscar</a>
+      <span class="pie-divisor">·</span>
+      <a href="favorites.html">Mis Favoritos</a>
+      <span class="pie-divisor">·</span>
+      <a href="https://openlibrary.org" target="_blank">Open Library API</a>
+    </div>
+    <p>Datos de <span class="pie-marca">Open Library API</span> &nbsp;·&nbsp; <span class="pie-marca">Bookshelf</span></p>
+  </footer>
+
+</body>
+</html>
+
+

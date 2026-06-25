@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="darkreader-lock">
+  <title>Bookshelf</title>
+  
+  <link rel="icon" href="libro-magico.png">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="barra-navegacion">
+    <div class="marcapaginas"></div>
+    <div class="contenedor-navegacion">
+      <a href="index.html" class="marca-logo">Book<span>shelf</span></a>
+      <nav class="enlaces-menu">
+        <a href="index.html" class="enlace">Buscar</a>
+        <a href="favorites.html" class="enlace active">Mis Favoritos (<span id="fav-count">0</span>)</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="seccion-favoritos-hero">
+    <h1 class="titulo-favoritos">Tus libros guardados</h1>
+    <p class="subtitulo-favoritos">Obras seleccionadas en tu biblioteca personal</p>
+    <div class="insignia-favoritos"><span id="fav-count-hero">0</span> libros en tu colección</div>
+  </section>
+
+  <div class="barra-filtros" id="barra-filtros-fav" hidden>
+    <div class="filtros-izquierda">
+      <span class="filtros-titulo">Ordenar por:</span>
+
+      <button class="boton-orden activo" id="fav-btn-reciente" onclick="ordenarFavoritosPor('reciente')">
+        Más reciente
+      </button>
+      <button class="boton-orden" id="fav-btn-titulo" onclick="ordenarFavoritosPor('titulo')">
+        Título A–Z
+      </button>
+      <button class="boton-orden" id="fav-btn-anio-nuevo" onclick="ordenarFavoritosPor('anio-nuevo')">
+        Año ↓ más nuevo
+      </button>
+      <button class="boton-orden" id="fav-btn-anio-viejo" onclick="ordenarFavoritosPor('anio-viejo')">
+        Año ↑ más viejo
+      </button>
+    </div>
+
+    <div class="filtros-derecha">
+      <span class="filtros-titulo">Filtrar:</span>
+
+      <select class="selector-filtro" id="filtro-autor-fav" onchange="mostrarFavoritos()">
+        <option value="todos">Todos los autores</option>
+      </select>
+
+      <button class="boton-eliminar-todos" onclick="eliminarTodosFavoritos()">
+        Eliminar todos
+      </button>
+    </div>
+  </div>
+
+  <main class="bloque-contenido">
+
+    <div class="estado-pantalla" id="empty-favorites" hidden>
+      <p class="texto-grande">🔖</p>
+      <p>Todavía no guardaste ningún libro en tu lista.</p>
+      <br>
+      <a href="index.html" class="link-volver">Volver al buscador</a>
+    </div>
+
+    <div class="grilla-libros" id="fav-grid"></div>
+
+  </main>
+
+  <footer class="pie-pagina">
+    <div class="pie-links">
+      <a href="index.html">Buscar</a>
+      <span class="pie-divisor">·</span>
+      <a href="favorites.html">Mis Favoritos</a>
+      <span class="pie-divisor">·</span>
+      <a href="https://openlibrary.org" target="_blank">Open Library API</a>
+    </div>
+    <p>Datos de <span class="pie-marca">Open Library API</span> &nbsp;·&nbsp; Trabajo Práctico &nbsp;·&nbsp; <span class="pie-marca">Bookshelf</span></p>
+  </footer>
+
+  <script type="module" src="favorites.js"></script>
+</body>
+</html>
+
+
+
