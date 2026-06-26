@@ -59,12 +59,12 @@ function mostrarFavoritos() {
         lista.sort((a, b) => a.titulo.localeCompare(b.titulo));
     }
 
-    if (ordenActual == "anio-nuevo") {
-        lista.sort((a, b) => ordenarAnio(b.anio, 0) - ordenarAnio(a.anio, 0));
+    if (ordenActual == "año-nuevo") {
+        lista.sort((a, b) => ordenarAño(b.Año, 0) - ordenarAño(a.Año, 0));
     }
 
-    if (ordenActual == "anio-viejo") {
-        lista.sort((a, b) => ordenarAnio(a.anio, 9999) - ordenarAnio(b.anio, 9999));
+    if (ordenActual == "año-viejo") {
+        lista.sort((a, b) => ordenarAño(a.Año, 9999) - ordenarAño(b.Año, 9999));
     }
 
     if (lista.length == 0) {
@@ -92,7 +92,7 @@ function dibujarFavoritos(lista) {
                 <div class="info-libro">
                     <h3 class="titulo-libro">${libro.titulo}</h3>
                     <p class="autor-libro">${libro.autor}</p>
-                    <span class="anio-libro">${libro.anio}</span>
+                    <span class="año-libro">${libro.año}</span>
                 </div>
             </div>
         `;
@@ -208,7 +208,7 @@ function abrirDetalleFavorito(id) {
             <div class="modal-info">
                 <h2>${libro.titulo}</h2>
                 <p><b>Autor:</b> ${libro.autor}</p>
-                <p><b>Año:</b> ${libro.anio}</p>
+                <p><b>Año:</b> ${libro.año}</p>
                 <p>Este libro esta guardado en tu lista de favoritos.</p>
                 <a class="link-detalle" href="https://openlibrary.org${libro.id}" target="_blank">Ver en Open Library</a>
             </div>
@@ -276,7 +276,7 @@ function actualizarContadores() {
     $contadorHero.textContent = total;
 }
 
-function ordenarAnio(valor, reemplazo) {
+function ordenarAño(valor, reemplazo) {
     const numero = parseInt(valor);
 
     if (isNaN(numero)) {
@@ -296,4 +296,5 @@ window.cerrarModal = cerrarModal;
 window.ordenarFavoritosPor = ordenarFavoritosPor;
 
 mostrarFavoritos();
+
 

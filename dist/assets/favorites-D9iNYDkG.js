@@ -1,11 +1,11 @@
-import"./styles-D1a0Tqep.js";var e=document.getElementById(`fav-grid`),t=document.getElementById(`empty-favorites`),n=document.getElementById(`fav-count`),r=document.getElementById(`fav-count-hero`),i=document.getElementById(`barra-filtros-fav`),a=document.getElementById(`filtro-autor-fav`),o=null,s=`reciente`,c=document.createElement(`div`);c.className=`cartel-deshacer`,c.style.display=`none`,document.body.appendChild(c);function l(){let e=localStorage.getItem(`coleccion_bookshelf`);return e?JSON.parse(e):[]}function u(e){localStorage.setItem(`coleccion_bookshelf`,JSON.stringify(e))}function d(){let n=l();if(w(),n.length==0){t.hidden=!1,i.hidden=!0,e.innerHTML=``;return}t.hidden=!0,i.hidden=!1,C(n);let r=[],o=a.value;if(n.forEach(e=>{(o==`todos`||e.autor==o)&&r.push(e)}),s==`reciente`&&r.reverse(),s==`titulo`&&r.sort((e,t)=>e.titulo.localeCompare(t.titulo)),s==`anio-nuevo`&&r.sort((e,t)=>T(t.anio,0)-T(e.anio,0)),s==`anio-viejo`&&r.sort((e,t)=>T(e.anio,9999)-T(t.anio,9999)),r.length==0){e.innerHTML=`<p class="mensaje-filtro">No hay favoritos de ese autor.</p>`;return}f(r)}function f(t){e.innerHTML=``,t.forEach(t=>{let n=`<div class="marcador-imagen">Sin portada<br>${t.titulo}</div>`;t.fotoId!=``&&(n=`<img src="https://covers.openlibrary.org/b/id/${t.fotoId}-M.jpg" alt="Portada">`),e.innerHTML+=`
+import"./styles-D1a0Tqep.js";var e=document.getElementById(`fav-grid`),t=document.getElementById(`empty-favorites`),n=document.getElementById(`fav-count`),r=document.getElementById(`fav-count-hero`),i=document.getElementById(`barra-filtros-fav`),a=document.getElementById(`filtro-autor-fav`),o=null,s=`reciente`,c=document.createElement(`div`);c.className=`cartel-deshacer`,c.style.display=`none`,document.body.appendChild(c);function l(){let e=localStorage.getItem(`coleccion_bookshelf`);return e?JSON.parse(e):[]}function u(e){localStorage.setItem(`coleccion_bookshelf`,JSON.stringify(e))}function d(){let n=l();if(w(),n.length==0){t.hidden=!1,i.hidden=!0,e.innerHTML=``;return}t.hidden=!0,i.hidden=!1,C(n);let r=[],o=a.value;if(n.forEach(e=>{(o==`todos`||e.autor==o)&&r.push(e)}),s==`reciente`&&r.reverse(),s==`titulo`&&r.sort((e,t)=>e.titulo.localeCompare(t.titulo)),s==`año-nuevo`&&r.sort((e,t)=>T(t.año,0)-T(e.año,0)),s==`año-viejo`&&r.sort((e,t)=>T(e.año,9999)-T(t.año,9999)),r.length==0){e.innerHTML=`<p class="mensaje-filtro">No hay favoritos de ese autor.</p>`;return}f(r)}function f(t){e.innerHTML=``,t.forEach(t=>{let n=`<div class="marcador-imagen">Sin portada<br>${t.titulo}</div>`;t.fotoId!=``&&(n=`<img src="https://covers.openlibrary.org/b/id/${t.fotoId}-M.jpg" alt="Portada">`),e.innerHTML+=`
             <div class="tarjeta-libro" onclick="abrirDetalleFavorito('${t.id}')">
                 <button class="boton-favorito" onclick="quitarFavorito(event, '${t.id}')">❤️</button>
                 <div class="contenedor-portada">${n}</div>
                 <div class="info-libro">
                     <h3 class="titulo-libro">${t.titulo}</h3>
                     <p class="autor-libro">${t.autor}</p>
-                    <span class="anio-libro">${t.anio}</span>
+                    <span class="año-libro">${t.año}</span>
                 </div>
             </div>
         `})}function p(e,t){e.stopPropagation();let n=l(),r=[];o=null,n.forEach(e=>{e.id==t?o=e:r.push(e)}),u(r),d(),m()}function m(){c.innerHTML=`Libro eliminado <button onclick="deshacerEliminar()">Deshacer</button>`,c.style.display=`block`,c.style.opacity=`1`,setTimeout(()=>{c.style.display=`none`,o=null},3e3)}function h(){if(o==null)return;let e=l();e.push(o),u(e),o=null,c.style.display=`none`,d()}function g(){l().length!=0&&_()}function _(){let e=document.createElement(`div`);e.className=`fondo-modal`,e.innerHTML=`
@@ -24,7 +24,7 @@ import"./styles-D1a0Tqep.js";var e=document.getElementById(`fav-grid`),t=documen
             <div class="modal-info">
                 <h2>${t.titulo}</h2>
                 <p><b>Autor:</b> ${t.autor}</p>
-                <p><b>Año:</b> ${t.anio}</p>
+                <p><b>Año:</b> ${t.año}</p>
                 <p>Este libro esta guardado en tu lista de favoritos.</p>
                 <a class="link-detalle" href="https://openlibrary.org${t.id}" target="_blank">Ver en Open Library</a>
             </div>

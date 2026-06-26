@@ -93,26 +93,26 @@ function aplicarFiltro() {
     const filtro = $filtroSiglo.value;
 
     libros.forEach((libro) => {
-        const anio = libro.first_publish_year;
+        const año = libro.first_publish_year;
 
         if (filtro == "todos") {
             lista.push(libro);
-        } else if (filtro == "2000" && anio >= 2000) {
+        } else if (filtro == "2000" && año >= 2000) {
             lista.push(libro);
-        } else if (filtro == "1900" && anio >= 1900 && anio <= 1999) {
+        } else if (filtro == "1900" && año >= 1900 && año <= 1999) {
             lista.push(libro);
-        } else if (filtro == "1800" && anio >= 1800 && anio <= 1899) {
+        } else if (filtro == "1800" && año >= 1800 && año <= 1899) {
             lista.push(libro);
-        } else if (filtro == "antiguo" && anio < 1800) {
+        } else if (filtro == "antiguo" && año < 1800) {
             lista.push(libro);
         }
     });
 
-    if (ordenActual == "anio-nuevo") {
+    if (ordenActual == "año-nuevo") {
         lista.sort((a, b) => (b.first_publish_year || 0) - (a.first_publish_year || 0));
     }
 
-    if (ordenActual == "anio-viejo") {
+    if (ordenActual == "año-viejo") {
         lista.sort((a, b) => (a.first_publish_year || 9999) - (b.first_publish_year || 9999));
     }
 
@@ -168,7 +168,7 @@ function mostrarLibros(lista) {
     lista.forEach((libro) => {
         const titulo = libro.title || "Sin titulo";
         const autor = libro.author_name ? libro.author_name[0] : "Autor desconocido";
-        const anio = libro.first_publish_year || "S/D";
+        const año = libro.first_publish_year || "S/D";
         const id = libro.key;
         const estaEnFavoritos = favoritos.some((favorito) => favorito.id == id);
         const corazon = estaEnFavoritos ? "❤️" : "🤍";
@@ -186,7 +186,7 @@ function mostrarLibros(lista) {
                 <div class="info-libro">
                     <h3 class="titulo-libro">${titulo}</h3>
                     <p class="autor-libro">${autor}</p>
-                    <span class="anio-libro">${anio}</span>
+                    <span class="año-libro">${año}</span>
                 </div>
             </div>
         `;
@@ -207,7 +207,7 @@ function guardarFavorito(e, id) {
             id: libro.key,
             titulo: libro.title || "Sin titulo",
             autor: libro.author_name ? libro.author_name[0] : "Autor desconocido",
-            anio: libro.first_publish_year || "S/D",
+            año: libro.first_publish_year || "S/D",
             fotoId: libro.cover_i || ""
         });
     }
@@ -222,7 +222,7 @@ function abrirDetalle(id) {
 
     const titulo = libro.title || "Sin titulo";
     const autor = libro.author_name ? libro.author_name.join(", ") : "Autor desconocido";
-    const anio = libro.first_publish_year || "Sin dato";
+    const año = libro.first_publish_year || "Sin dato";
     const ediciones = libro.edition_count || "Sin dato";
     const temas = libro.subject ? libro.subject.slice(0, 5).join(", ") : "Sin dato";
 
@@ -242,7 +242,7 @@ function abrirDetalle(id) {
             <div class="modal-info">
                 <h2>${titulo}</h2>
                 <p><b>Autor:</b> ${autor}</p>
-                <p><b>Primer año:</b> ${anio}</p>
+                <p><b>Primer año:</b> ${año}</p>
                 <p><b>Ediciones:</b> ${ediciones}</p>
                 <p><b>Temas:</b> ${temas}</p>
                 <a class="link-detalle" href="https://openlibrary.org${libro.key}" target="_blank">Ver en Open Library</a>
@@ -321,4 +321,5 @@ window.limpiarBusqueda = limpiarBusqueda;
 window.cambiarPagina = cambiarPagina;
 
 actualizarContador();
+
 
