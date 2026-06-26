@@ -311,6 +311,15 @@ function ordenarAño(valor, reemplazo) {
     return numero;
 }
 
+window.mostrarFavoritos = mostrarFavoritos;
+window.quitarFavorito = quitarFavorito;
+window.abrirDetalleFavorito = abrirDetalleFavorito;
+window.ordenarFavoritosPor = ordenarFavoritosPor;
+window.eliminarTodosFavoritos = eliminarTodosFavoritos;
+window.deshacerEliminar = deshacerEliminar;
+window.cerrarModal = cerrarModal;
+window.confirmarEliminarTodos = confirmarEliminarTodos;
+
 mostrarFavoritos();
 
 
