@@ -62,13 +62,13 @@ function mostrarFavoritos() {
 
     if (ordenActual === "año-nuevo") {
         lista.sort(function(a, b) {
-            return ordenarAño(b.año, 0) - ordenarAño(a.año, 0);
+            return ordenarAño(obtenerAño(a), 0) - ordenarAño(obtenerAño(b), 0);
         });
     }
 
     if (ordenActual === "año-viejo") {
         lista.sort(function(a, b) {
-            return ordenarAño(a.año, 9999) - ordenarAño(b.año, 9999);
+            return ordenarAño(obtenerAño(a), 9999) - ordenarAño(obtenerAño(b), 9999);
         });
     }
 
@@ -85,10 +85,13 @@ function dibujarFavoritos(lista) {
 
     for (var i = 0; i < lista.length; i++) {
         var libro = lista[i];
-        var portada = "<div class=\"marcador-imagen\">Sin portada<br>" + libro.titulo + "</div>";
+        var titulo = obtenerTitulo(libro);
+        var coverId = obtenerCoverId(libro);
+        var año = obtenerAño(libro);
+        var portada = "<div class=\"marcador-imagen\">Sin portada<br>" + titulo + "</div>";
 
-        if (libro.idFoto !== "") {
-            portada = "<img src=\"https://covers.openlibrary.org/b/id/" + libro.idFoto + "-M.jpg\" alt=\"Portada\">";
+        if (coverId !== "") {
+            portada = "<img src=\"https://covers.openlibrary.org/b/id/" + coverId + "-M.jpg\" alt=\"Portada\">";
         }
 
         grillaFavoritos.innerHTML +=
@@ -96,9 +99,9 @@ function dibujarFavoritos(lista) {
             "<button class=\"boton-favorito\" onclick=\"quitarFavorito(event, '" + libro.id + "')\">❤️</button>" +
             "<div class=\"contenedor-portada\">" + portada + "</div>" +
             "<div class=\"info-libro\">" +
-            "<h3 class=\"titulo-libro\">" + libro.titulo + "</h3>" +
+            "<h3 class=\"titulo-libro\">" + titulo + "</h3>" +
             "<p class=\"autor-libro\">" + libro.autor + "</p>" +
-            "<span class=\"año-libro\">" + libro.primerAñoPublicacion + "</span>" +
+            "<span class=\"año-libro\">" + año + "</span>" +
             "</div>" +
             "</div>";
     }
@@ -205,9 +208,12 @@ function abrirDetalleFavorito(id) {
         return;
     }
 
+    var titulo = obtenerTitulo(libroSeleccionado);
+    var año = obtenerAño(libroSeleccionado);
+    var coverId = obtenerCoverId(libroSeleccionado);
     var portada = "<div class=\"modal-sin-portada\">Sin portada</div>";
-    if (libroSeleccionado.idFoto !== "") {
-        portada = "<img src=\"https://covers.openlibrary.org/b/id/" + libroSeleccionado.idFoto + "-L.jpg\" alt=\"Portada\">";
+    if (coverId !== "") {
+        portada = "<img src=\"https://covers.openlibrary.org/b/id/" + coverId + "-L.jpg\" alt=\"Portada\">";
     }
 
     var modal = document.createElement("div");
@@ -217,9 +223,9 @@ function abrirDetalleFavorito(id) {
         "<button class=\"boton-cerrar-modal\" onclick=\"cerrarModal()\">Cerrar</button>" +
         "<div class=\"modal-portada\">" + portada + "</div>" +
         "<div class=\"modal-info\">" +
-        "<h2>" + libroSeleccionado.titulo + "</h2>" +
+        "<h2>" + titulo + "</h2>" +
         "<p><b>Autor:</b> " + libroSeleccionado.autor + "</p>" +
-        "<p><b>Primer año:</b> " + libroSeleccionado.primerAñoPublicacion + "</p>" +
+        "<p><b>Primer año:</b> " + año + "</p>" +
         "<p>Este libro esta guardado en tu lista de favoritos.</p>" +
         "<a class=\"link-detalle\" href=\"https://openlibrary.org" + libroSeleccionado.id + "\" target=\"_blank\">Ver en Open Library</a>" +
         "</div>" +
@@ -283,6 +289,18 @@ function actualizarContadores() {
     var total = obtenerFavoritos().length;
     contadorFavoritos.textContent = total;
     contadorHero.textContent = total;
+}
+
+function obtenerCoverId(libro) {
+    return libro.coverId || libro.idFoto || "";
+}
+
+function obtenerAño(libro) {
+    return libro.firstPublishYear || libro.primerAñoPublicacion || libro.año || "S/D";
+}
+
+function obtenerTitulo(libro) {
+    return libro.titulo || libro.title || "Sin titulo";
 }
 
 function ordenarAño(valor, reemplazo) {
