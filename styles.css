@@ -843,6 +843,15 @@ body {
     width: 100%;
   }
 
+  .grilla-libros {
+    gap: 16px;
+    justify-content: space-between;
+  }
+
+  .tarjeta-libro {
+    width: calc(50% - 8px);
+  }
+
   .botones-rapidos {
     flex-direction: column;
     align-items: stretch;
@@ -921,8 +930,8 @@ body {
   }
 
   .tarjeta-libro {
-    width: 100%;
-    max-width: 260px;
+    width: calc(50% - 8px);
+    max-width: none;
   }
 
   .pie-links {
