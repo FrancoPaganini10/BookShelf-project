@@ -160,7 +160,10 @@ function mostrarPagina(lista) {
 function cambiarPagina(cambio) {
     paginaActual = paginaActual + cambio;
     aplicarFiltro();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const filtros = document.getElementById('barra-filtros');
+    if (filtros) {
+        filtros.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 }
 
 function mostrarLibros(lista) {

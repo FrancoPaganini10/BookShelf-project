@@ -845,22 +845,11 @@ body {
 
   .grilla-libros {
     gap: 16px;
-    justify-content: space-between;
+    justify-content: center;
   }
 
   .tarjeta-libro {
-    width: calc(50% - 8px);
-  }
-
-  .botones-rapidos {
-    flex-direction: column;
-    align-items: stretch;
-    max-width: 340px;
-    margin: 0 auto;
-  }
-
-  .chip {
-    width: 100%;
+    width: 190px;
   }
 
   .barra-filtros {
@@ -927,11 +916,6 @@ body {
   .boton-pagina {
     width: 100%;
     max-width: 260px;
-  }
-
-  .tarjeta-libro {
-    width: calc(50% - 8px);
-    max-width: none;
   }
 
   .pie-links {
